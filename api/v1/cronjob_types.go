@@ -40,7 +40,7 @@ type CronJobSpec struct {
 	// Optional deadline in seconds for starting the job if it misses scheduled
 	// time for any reason.
 	// +optional
-	StartingDeadlieSeconds *int64 `json:"startingDeadlineSeconds,omitempty"`
+	StartingDeadlineSeconds *int64 `json:"startingDeadlineSeconds,omitempty"`
 
 	// Valid values are:
 	// - Allow (default)
