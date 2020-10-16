@@ -42,7 +42,20 @@ var _ webhook.Defaulter = &CronJob{}
 func (r *CronJob) Default() {
 	cronjoblog.Info("default", "name", r.Name)
 
-	// TODO(user): fill in your defaulting logic.
+	if r.Spec.ConcurrencyPolicy == "" {
+		r.Spec.ConcurrencyPolicy = AllowConcurrent
+	}
+	if r.Spec.Suspend == nil {
+		r.Spec.Suspend = new(bool)
+	}
+	if r.Spec.SuccessfulJobsHistoryLimit == nil {
+		r.Spec.SuccessfulJobsHistoryLimit = new(int32)
+		*r.Spec.SuccessfulJobsHistoryLimit = 3
+	}
+	if r.Spec.FailedJobsHistoryLimit == nil {
+		r.Spec.FailedJobsHistoryLimit = new(int32)
+		*r.Spec.FailedJobsHistoryLimit = 1
+	}
 }
 
 // TODO(user): change verbs to "verbs=create;update;delete" if you want to enable deletion validation.
